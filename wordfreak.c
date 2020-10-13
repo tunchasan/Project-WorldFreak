@@ -6,6 +6,11 @@
 #include <string.h>
 #include <ctype.h>
 #include <stdlib.h>
+#include "Node.h"
+#include "HashTable.h"
+
+// Represents hash table array
+HashNode** hashTable = NULL;
 
 // Converts given text into words
 void wordConverter(char*);
@@ -19,6 +24,9 @@ int main(int argc, char  *argv[])
         // TODO
     }
     else if(argc > 1){ // Handle given txt files
+
+        // Initialize hash table
+        hashTable = createHashTable();
 
         int fdin;
 
@@ -59,6 +67,9 @@ void wordConverter(char* line){
     while (word != NULL)  {
       printf ("%s\n", word);
       word = strtok (NULL, " &");
+
+      // TODO
+
     }
 }
 
