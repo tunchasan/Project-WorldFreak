@@ -9,7 +9,7 @@
 #include "Node.h"
 #include "HashTable.h"
 
-// Represents hash table array
+// Represents hash table array (length : 26)
 HashNode** hashTable = NULL;
 
 // Converts given text into words
@@ -17,6 +17,9 @@ void wordConverter(char*);
 
 // Converts given word to lowercase
 char* toLowerCase(char*);
+
+// Finds according hashTable's index for the given word
+void hashTableWordPlacer(const char*);
 
 int main(int argc, char  *argv[])
 {
@@ -65,11 +68,12 @@ void wordConverter(char* line){
     word = strtok(line, " ");
 
     while (word != NULL)  {
-      printf ("%s\n", word);
-      word = strtok (NULL, " &");
+      word = strtok (NULL, " ");
 
-      // TODO
+      if(word == NULL) break;
 
+      // Sends "word" to the function for placing it to the according index 
+      hashTableWordPlacer(strdup(word));
     }
 }
 
@@ -87,4 +91,13 @@ char* toLowerCase(char* text) {
     }
 
     return word;
+}
+
+void hashTableWordPlacer(const char* word){
+    int i;
+    for(i = 0; i < 26; i++){
+        if(hashTable[i]->letter == word[0]){
+            printf("I FOUND MY PLACE : %c : %s\n", hashTable[i]->letter, word);
+        }
+    }
 }
