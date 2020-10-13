@@ -17,6 +17,8 @@ HashNode** createHashTable(){
 
         asciiCursor++;
     }
+
+    return hashTable;
 }
 
 HashNode* createHashNode(char letter, BST* BSTRoot){
@@ -24,4 +26,6 @@ HashNode* createHashNode(char letter, BST* BSTRoot){
     // Assing according fields to hashNode's fields
     hashNode->letter = letter;
     hashNode->root = NULL;
+
+    return hashNode;
 }
