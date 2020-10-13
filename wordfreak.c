@@ -49,7 +49,7 @@ void wordConverter(char* line){
     }
 
     // To lowercase
-    toLowerCase(line);
+    line = toLowerCase(line);
 
     // Represents a seperated word
     const char *word;
