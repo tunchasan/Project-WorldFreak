@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "Node.h"
 
 struct BST{
@@ -17,9 +18,9 @@ typedef struct BST BST;
 BST* createBSTNode();
 
 // adds BST Nodes to the BST
-Node* addNodeToBST(Node*);
+Node* addNodeToBST(Node*, const char*);
 
-// prints BST Nodes status
+// prints BST Nodes status as inorder traversal
 void printBST(Node*);
 
 #endif

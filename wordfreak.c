@@ -21,6 +21,9 @@ char* toLowerCase(char*);
 // Finds according hashTable's index for the given word
 void hashTableWordPlacer(const char*);
 
+// Prints all data for each hashtable's index
+void printAllData();
+
 int main(int argc, char  *argv[])
 {
     if(argc == 0) { // Standart input
@@ -44,6 +47,9 @@ int main(int argc, char  *argv[])
         }
 
         close(fdin);
+
+        // TODO
+        printAllData();
     }
 
   return 0;
@@ -97,7 +103,15 @@ void hashTableWordPlacer(const char* word){
     int i;
     for(i = 0; i < 26; i++){
         if(hashTable[i]->letter == word[0]){
-            printf("I FOUND MY PLACE : %c : %s\n", hashTable[i]->letter, word);
+            // Sends "word" and bst's root to method
+            hashTable[i]->root = addNodeToBST(hashTable[i]->root, word);
         }
+    }
+}
+
+void printAllData(){
+    int i;
+    for(i = 0; i < 26; i++){
+        printBST(hashTable[i]->root);
     }
 }
