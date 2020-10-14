@@ -9,6 +9,9 @@
 #include "Node.h"
 #include "HashTable.h"
 
+// Max file size
+#define MAXSIZE 50000
+
 // Represents hash table array (length : 26)
 HashNode** hashTable = NULL;
 
@@ -36,11 +39,13 @@ int main(int argc, char  *argv[])
 
         int fdin;
 
-        char *buf = (char*)malloc(1024*(sizeof(char)));
+        // TODO
+
+        char *buf = (char*)malloc(MAXSIZE*(sizeof(char)));
 
         fdin = open(argv[1],O_RDONLY);
 
-        while(read(fdin, buf, 1024) > 0)
+        while(read(fdin, buf, MAXSIZE) > 0)
         {
             // Sends each row to wordConverter
             wordConverter(buf);
@@ -60,7 +65,7 @@ void wordConverter(char* line){
     int i;
     // Replace space for each character that' not a alphacharacter
     for(i = 0; i < strlen(line); i++){
-        if(!isalpha(line[i])){
+        if(isalpha(line[i]) == 0){
             line[i] = ' ';
         }
     }
@@ -74,12 +79,13 @@ void wordConverter(char* line){
     word = strtok(line, " ");
 
     while (word != NULL)  {
-      word = strtok (NULL, " ");
-
-      if(word == NULL) break;
 
       // Sends "word" to the function for placing it to the according index 
       hashTableWordPlacer(strdup(word));
+
+      word = strtok (NULL, " ");
+
+      if(word == NULL) continue;
     }
 }
 
@@ -101,6 +107,7 @@ char* toLowerCase(char* text) {
 
 void hashTableWordPlacer(const char* word){
     int i;
+
     for(i = 0; i < 26; i++){
         if(hashTable[i]->letter == word[0]){
             // Sends "word" and bst's root to method
@@ -112,6 +119,7 @@ void hashTableWordPlacer(const char* word){
 void printAllData(){
     int i;
     for(i = 0; i < 26; i++){
+        // prints bst's current status
         printBST(hashTable[i]->root);
     }
 }

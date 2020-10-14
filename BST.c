@@ -30,8 +30,6 @@ Node* addNodeToBST(Node* root, const char* word){
     // If the given word is equal to root's word
     else if(strcmp(word, root->word) == 0){
         root->count = root->count + 1;
-
-        return root;
     }
 
     // If the given word is less than root's word
