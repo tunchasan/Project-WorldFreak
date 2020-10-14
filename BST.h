@@ -2,6 +2,7 @@
 #define BST_H
 
 #include <stdio.h>
+#include <stdlib.h>
 #include "Node.h"
 
 struct BST{
@@ -11,6 +12,9 @@ struct BST{
 };
 
 typedef struct BST BST;
+
+// creates BST Node
+BST* createBSTNode();
 
 // adds BST Nodes to the BST
 Node* addNodeToBST(Node*);

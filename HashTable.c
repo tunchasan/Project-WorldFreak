@@ -10,7 +10,8 @@ HashNode** createHashTable(){
 
     for(i = 0; i < 26; i++){
 
-        BST* newBST = NULL;
+        // Creates new BST
+        BST* newBST = createBSTNode();
 
         // Initialize hashTable's index
         hashTable[i] = createHashNode((char)asciiCursor, newBST);
@@ -25,7 +26,7 @@ HashNode* createHashNode(char letter, BST* BSTRoot){
     HashNode* hashNode = (HashNode*)malloc(sizeof(HashNode));
     // Assing according fields to hashNode's fields
     hashNode->letter = letter;
-    hashNode->root = NULL;
+    hashNode->root = BSTRoot->root;
 
     return hashNode;
 }
