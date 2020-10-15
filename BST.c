@@ -47,7 +47,8 @@ void printBST(Node* root){
 
     printBST(root->leftChild);
 
-    printf("%s      : %d\n", root->word, root->count);
+    // EXTRA TODO
+    printf("%-15s: %5d\n", root->word, root->count);
 
     printBST(root->rightChild);
 }
