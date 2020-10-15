@@ -9,6 +9,7 @@
 #include "Node.h"
 #include "HashTable.h"
 
+// TODO
 // Max file size
 #define MAXSIZE 50000
 
@@ -37,23 +38,24 @@ int main(int argc, char  *argv[])
         // Initialize hash table
         hashTable = createHashTable();
 
-        int fdin;
-
-        // TODO
+        int fdin, i;
 
         char *buf = (char*)malloc(MAXSIZE*(sizeof(char)));
 
-        fdin = open(argv[1],O_RDONLY);
+        // Handle many files open and read processes
+        for(i = 1; i < argc; i++){
 
-        while(read(fdin, buf, MAXSIZE) > 0)
-        {
-            // Sends each row to wordConverter
-            wordConverter(buf);
+            fdin = open(argv[i],O_RDONLY);
+
+            while(read(fdin, buf, MAXSIZE) > 0)
+            {
+                // Sends each row to wordConverter
+                wordConverter(buf);
+            }
+
+            close(fdin);
         }
 
-        close(fdin);
-
-        // TODO
         printAllData();
     }
 
@@ -107,7 +109,6 @@ char* toLowerCase(char* text) {
 
 void hashTableWordPlacer(const char* word){
     int i;
-
     for(i = 0; i < 26; i++){
         if(hashTable[i]->letter == word[0]){
             // Sends "word" and bst's root to method
