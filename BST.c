@@ -10,6 +10,7 @@ BST* createBSTNode(){
 }
 
 Node* addNodeToBST(Node* root, const char* word){
+    
     // If the tree is empty
     if(root == NULL){
         // creates new node
@@ -47,8 +48,11 @@ void printBST(Node* root){
 
     printBST(root->leftChild);
 
-    // EXTRA TODO
+    // EXTRA TODO -> sprintf
     printf("%-15s: %5d\n", root->word, root->count);
+
+    // TODO
+    // Write content to "output.txt"
 
     printBST(root->rightChild);
 }

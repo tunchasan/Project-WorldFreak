@@ -30,9 +30,25 @@ void printAllData();
 
 int main(int argc, char  *argv[])
 {
-    if(argc == 0) { // Standart input
-        // TODO
+    if(argc == 1) { // Standart input
+
+        // Initialize hash table
+        hashTable = createHashTable();
+
+        char* text = (char*)malloc(MAXSIZE*(sizeof(char)));
+
+        // gets text from user
+        fgets(text, MAXSIZE, stdin);
+
+        printf("\n");
+
+        // Sends each row to wordConverter
+        wordConverter(text);
+
+        // Prints current status
+        printAllData();
     }
+
     else if(argc > 1){ // Handle given txt files
 
         // Initialize hash table
@@ -41,6 +57,9 @@ int main(int argc, char  *argv[])
         int fdin, i;
 
         char *buf = (char*)malloc(MAXSIZE*(sizeof(char)));
+
+        // Sends each row to wordConverter
+                wordConverter(buf);
 
         // Handle many files open and read processes
         for(i = 1; i < argc; i++){
@@ -56,6 +75,7 @@ int main(int argc, char  *argv[])
             close(fdin);
         }
 
+        // Prints current status
         printAllData();
     }
 
