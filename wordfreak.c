@@ -28,7 +28,7 @@ void hashTableWordPlacer(const char*);
 // Prints all data for each hashtable's index
 void printAllData();
 
-int main(int argc, char  *argv[])
+int main(int argc, char *argv[], char** envp)
 {
     // Initialize hash table
     hashTable = createHashTable();
@@ -54,10 +54,52 @@ int main(int argc, char  *argv[])
         close(fdin);
     }
 
+    // Reset counter for new for loop
+    i = 0;
+
+    // Handle enviroment variables
+
+    // Max limit of env variable
+    size_t length = 100;
+
+    for(i = 0; i < 5; i++){
+        // Max limit of env variable
+        char* envName = (char*)malloc(sizeof(char));
+        char* env = envp[i];
+
+        int counter = 0;
+
+        if(length < strlen(env)) break;
+
+        for(int i = 0; i < strlen(env); i++){
+            // get env variables
+            if(env[i] != '='){
+                envName[i] = env[i];
+                counter++;
+            }
+            else
+                break;
+        }
+
+        // Handle 1 character environment variable issue
+        if(1 >= counter) continue;
+
+        fdin = open(getenv(envName),O_RDONLY);
+
+        while(read(fdin, buf, MAXSIZE) > 0)
+        {
+            // Sends each row to wordConverter
+            wordConverter(buf);
+        }
+
+        close(fdin);
+    }
+
     char* text = (char*)malloc(MAXSIZE*(sizeof(char)));
 
     printf("If you won't use standart input. Control+D for determinate the program! \n");
 
+    // Handle standart input
     while(fgets(text, MAXSIZE, stdin) != NULL){
 
         // Sends each row to wordConverter
