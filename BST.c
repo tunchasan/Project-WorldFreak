@@ -41,18 +41,59 @@ Node* addNodeToBST(Node* root, const char* word){
     return root;
 }
 
-void printBST(Node* root){
+void printBST(Node* root, int fileNo, int maxWordLength){
     if(root == NULL){
         return;
     }
 
-    printBST(root->leftChild);
+    printBST(root->leftChild, fileNo, maxWordLength);
 
-    // EXTRA TODO -> sprintf
-    printf("\n%-15s: %5d", root->word, root->count);
+    // Alling and print the data to "output.txt"
+    allignText(root->word, root->count, fileNo, maxWordLength);
 
-    // TODO
+    printBST(root->rightChild, fileNo, maxWordLength);
+}
+
+void allignText(const char* text, int count, int fileNo, int maxWordLength){
+
+    // counter
+    int i;
+    int counter = 0;
+
+    char line[200];
+
+    for(i = 0; i < 200; i++)
+       line[i] = ' ';
+
+    for(i = 0; i < maxWordLength; i++){
+        line[i] = text[i];
+    }
+
+    // for(i = strlen(text); i < maxWordLength + 1; i++){
+    //     line[i] = ' ';
+    // }
+
+    // line[maxWordLength + 1] = ':';
+    // line[maxWordLength + 2] = ' ';
+
+    // char *wordFrequency = (char*)malloc(10*sizeof(char));; 
+
+    // int y;
+
+    // for(y = 0; y < 10; y++)
+    //     wordFrequency[y] = ' ';
+
+    // sprintf(wordFrequency, "%d", count);
+
+    // for(i = maxWordLength + 2; i < maxWordLength + 13; i++){
+    //     line[i] = wordFrequency[counter];
+    //     counter++;
+    // }
+
+    // line[maxWordLength + 13] = '\n';
+
+    printf("%s\n", line);
+
     // Write content to "output.txt"
-
-    printBST(root->rightChild);
+     write(fileNo, line ,200);
 }

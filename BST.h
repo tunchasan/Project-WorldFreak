@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 #include "Node.h"
 
 struct BST{
@@ -21,6 +22,9 @@ BST* createBSTNode();
 Node* addNodeToBST(Node*, const char*);
 
 // prints BST Nodes status as inorder traversal
-void printBST(Node*);
+void printBST(Node*, int, int);
+
+// alligns text for given data
+void allignText(const char*, int, int, int);
 
 #endif

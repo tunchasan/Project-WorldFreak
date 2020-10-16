@@ -16,6 +16,9 @@
 // Represents hash table array (length : 26)
 HashNode** hashTable = NULL;
 
+// Represents max word' length count
+int maxWordLength = 0;
+
 // Converts given text into words
 void wordConverter(char*);
 
@@ -139,6 +142,10 @@ void wordConverter(char* line){
 
     while (word != NULL)  {
 
+      // Update max word length
+      if(strlen(word) > maxWordLength)
+        maxWordLength = strlen(word);
+
       // Sends "word" to the function for placing it to the according index 
       hashTableWordPlacer(strdup(word));
 
@@ -175,11 +182,19 @@ void hashTableWordPlacer(const char* word){
 }
 
 void printAllData(){
-    int i;
+    int i, fileNo;
+
+    char* line = (char*)malloc(200*sizeof(char));
+
+    // create new file for "output.txt"
+    fileNo = open("output.txt", O_CREAT | O_TRUNC | O_WRONLY, 0644);
+
     for(i = 0; i < 26; i++){
         // prints bst's current status
-        printBST(hashTable[i]->root);
+        printBST(hashTable[i]->root, fileNo, maxWordLength);
     }
+
+    close(fileNo);
 
     printf("\n");
 }
