@@ -60,40 +60,42 @@ void allignText(const char* text, int count, int fileNo, int maxWordLength){
     int i;
     int counter = 0;
 
-    char line[200];
+    char *line = (char*)malloc(100*sizeof(char));
 
-    for(i = 0; i < 200; i++)
+    for(i = 0; i < 100; i++)
        line[i] = ' ';
 
-    for(i = 0; i < maxWordLength; i++){
+    for(i = 0; i < strlen(text); i++){
         line[i] = text[i];
     }
 
-    // for(i = strlen(text); i < maxWordLength + 1; i++){
-    //     line[i] = ' ';
-    // }
+    for(i = strlen(text); i < maxWordLength + 1; i++){
+        line[i] = ' ';
+    }
 
-    // line[maxWordLength + 1] = ':';
-    // line[maxWordLength + 2] = ' ';
+    line[maxWordLength + 1] = ':';
+    line[maxWordLength + 2] = ' ';
 
-    // char *wordFrequency = (char*)malloc(10*sizeof(char));; 
+    char *wordFrequency = (char*)malloc(10*sizeof(char));; 
 
-    // int y;
+    int y;
 
-    // for(y = 0; y < 10; y++)
-    //     wordFrequency[y] = ' ';
+    for(y = 0; y < 10; y++)
+        wordFrequency[y] = ' ';
 
-    // sprintf(wordFrequency, "%d", count);
+    sprintf(wordFrequency, "%d", count);
 
-    // for(i = maxWordLength + 2; i < maxWordLength + 13; i++){
-    //     line[i] = wordFrequency[counter];
-    //     counter++;
-    // }
+    for(i = maxWordLength + 3; i < maxWordLength + 13; i++){
+        line[i] = wordFrequency[counter];
+        counter++;
+    }
 
-    // line[maxWordLength + 13] = '\n';
+    char* newLine = "\n";
 
-    printf("%s\n", line);
+    line = strcat(line, newLine);
+    
+    // printf("%s", line);
 
     // Write content to "output.txt"
-     write(fileNo, line ,200);
+    write(fileNo, line ,strlen(line));
 }

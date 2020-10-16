@@ -187,7 +187,7 @@ void printAllData(){
     char* line = (char*)malloc(200*sizeof(char));
 
     // create new file for "output.txt"
-    fileNo = open("output.txt", O_CREAT | O_TRUNC | O_WRONLY, 0644);
+    fileNo = open("output.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 
     for(i = 0; i < 26; i++){
         // prints bst's current status
