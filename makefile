@@ -4,4 +4,4 @@ compile:
 	gcc -I ./include/ -o ./lib/HashTable.o -c ./src/HashTable.c
 	gcc -I ./include/ -o ./lib/Node.o -c ./src/Node.c
 
-	gcc -I ./include/ -o ./wordfreak $(Objects) ./src/wordfreak.c
+	gcc -I ./include/ -o ./bin/wordfreak $(Objects) ./src/wordfreak.c
