@@ -30,59 +30,54 @@ void printAllData();
 
 int main(int argc, char  *argv[])
 {
-    if(argc == 1) { // Standart input
+    // Initialize hash table
+    hashTable = createHashTable();
 
-        // Initialize hash table
-        hashTable = createHashTable();
+    char *buf = (char*)malloc(MAXSIZE*(sizeof(char)));
 
-        char* text = (char*)malloc(MAXSIZE*(sizeof(char)));
+    int fdin, i;
 
-        // gets text from user
-        fgets(text, MAXSIZE, stdin);
+    // Sends each row to wordConverter
+    wordConverter(buf);
 
-        printf("\n");
+    // Handle many files open and read processes
+    for(i = 1; i < argc; i++){
+
+        fdin = open(argv[i],O_RDONLY);
+
+        while(read(fdin, buf, MAXSIZE) > 0)
+        {
+            // Sends each row to wordConverter
+            wordConverter(buf);
+        }
+
+        close(fdin);
+    }
+
+    char* text = (char*)malloc(MAXSIZE*(sizeof(char)));
+
+    printf("If you won't use standart input. Control+D for determinate the program! \n");
+
+    while(fgets(text, MAXSIZE, stdin) != NULL){
 
         // Sends each row to wordConverter
         wordConverter(text);
 
-        // Prints current status
-        printAllData();
-    }
-
-    else if(argc > 1){ // Handle given txt files
-
-        // Initialize hash table
-        hashTable = createHashTable();
-
-        int fdin, i;
-
-        char *buf = (char*)malloc(MAXSIZE*(sizeof(char)));
+        // gets text from user
+        fgets(text, MAXSIZE, stdin);
 
         // Sends each row to wordConverter
-                wordConverter(buf);
-
-        // Handle many files open and read processes
-        for(i = 1; i < argc; i++){
-
-            fdin = open(argv[i],O_RDONLY);
-
-            while(read(fdin, buf, MAXSIZE) > 0)
-            {
-                // Sends each row to wordConverter
-                wordConverter(buf);
-            }
-
-            close(fdin);
-        }
-
-        // Prints current status
-        printAllData();
+        wordConverter(text);
     }
 
-  return 0;
+    // Prints current status
+    printAllData();
+
+    return 0;
 }
 
 void wordConverter(char* line){
+
     // counter
     int i;
     // Replace space for each character that' not a alphacharacter
@@ -143,4 +138,6 @@ void printAllData(){
         // prints bst's current status
         printBST(hashTable[i]->root);
     }
+
+    printf("\n");
 }

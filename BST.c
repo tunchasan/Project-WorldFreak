@@ -49,7 +49,7 @@ void printBST(Node* root){
     printBST(root->leftChild);
 
     // EXTRA TODO -> sprintf
-    printf("%-15s: %5d\n", root->word, root->count);
+    printf("\n%-15s: %5d", root->word, root->count);
 
     // TODO
     // Write content to "output.txt"
