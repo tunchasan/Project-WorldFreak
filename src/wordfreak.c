@@ -107,12 +107,6 @@ int main(int argc, char *argv[], char** envp)
 
         // Sends each row to wordConverter
         wordConverter(text);
-
-        // gets text from user
-        fgets(text, MAXSIZE, stdin);
-
-        // Sends each row to wordConverter
-        wordConverter(text);
     }
 
     // Prints current status
