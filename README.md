@@ -44,9 +44,7 @@ And of course, it can process all of these at once.
 #### ```$ cat newton.txt | WORD_FREAK=aladdin.txt ./wordfreak iliad.txt odyssey.txt```
 
 ## Words
-<justify>
 Words is comprised of only alpha characters, and all alpha characters should be taken to be lower case. For example "POT4TO???" gives the words "pot" and "to". And the word "isn’t" is reading as "isn" and "t". While this isn't necessarily intuitively correct, this is what the code is doing:
-<justify>
   
 ![enter image description here](https://i.hizliresim.com/WtpXIh.png)
 
@@ -58,19 +56,16 @@ is fine.
 <justify>
   
 ## Output
-<justify>
 The words are written to the file alphabetically (the BSTs make this fairly trivial). Each word will give a line of the form
 "[word][additional space] : [additional space][number]\n". The caveat is that all the colons are lined up. The words are
 left-aligned and the longest will have a single space between its end and the colon (note "respectfully" in the example
 below); the numbers are right-aligned and the longest will have a single space between the colon and its beginning (note
 126 in the example below).
-<justify>
   
 ![enter image description here](https://i.hizliresim.com/0pcExw.png)
 
 <justify>
-The output file is named output.txt. When opening the file to write to, the program will either use to create the file
-or remove all existing contents, so make use of open()'s O_CREAT and O_TRUNC. Moreover, We want the file’s permissions to be set so that it can be read. open()’s third argument determines permissions of created files, something like 0644 will make it readable.
+The output file is named output.txt. When opening the file to write to, the program will either use to create the file or remove all existing contents, so make use of open()'s O_CREAT and O_TRUNC. Moreover, We want the file’s permissions to be set so that it can be read. open()’s third argument determines permissions of created files, something like 0644 will make it readable.
 <justify>
   
 ### ```make```
