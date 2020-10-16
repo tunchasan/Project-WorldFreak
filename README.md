@@ -45,9 +45,7 @@ And of course, it can process all of these at once.
 
 ## Words
 <justify>
-Words is comprised of only alpha characters, and all alpha characters should be taken to be lower case.
-For example "POT4TO???" gives the words "pot" and "to". And the word "isn’t" is reading as "isn" and "t". While
-this isn't necessarily intuitively correct, this is what the code is doing:
+Words is comprised of only alpha characters, and all alpha characters should be taken to be lower case. For example "POT4TO???" gives the words "pot" and "to". And the word "isn’t" is reading as "isn" and "t". While this isn't necessarily intuitively correct, this is what the code is doing:
 <justify>
   
 ![enter image description here](https://i.hizliresim.com/WtpXIh.png)
@@ -72,10 +70,8 @@ below); the numbers are right-aligned and the longest will have a single space b
 
 <justify>
 The output file is named output.txt. When opening the file to write to, the program will either use to create the file
-or remove all existing contents, so make use of open()'s O_CREAT and O_TRUNC. Moreover, We want the file’s permissions to be set so that it can be read. open()’s third argument determines permissions of created files, something like0644 will make it readable.
+or remove all existing contents, so make use of open()'s O_CREAT and O_TRUNC. Moreover, We want the file’s permissions to be set so that it can be read. open()’s third argument determines permissions of created files, something like 0644 will make it readable.
 <justify>
   
-### make
-<justify>
+### ```make```
 The console app uses Makefile to manage folder and running processes. So the app can be run via cmd with "make" command on project folder' directory.
-<justify>
