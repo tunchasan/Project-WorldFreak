@@ -9,7 +9,6 @@
 #include "Node.h"
 #include "HashTable.h"
 
-// TODO
 // Max file size
 #define MAXSIZE 50000
 
@@ -40,9 +39,6 @@ int main(int argc, char *argv[], char** envp)
 
     int fdin, i;
 
-    // Sends each row to wordConverter
-    wordConverter(buf);
-
     // Handle many files open and read processes
     for(i = 1; i < argc; i++){
 
@@ -62,45 +58,19 @@ int main(int argc, char *argv[], char** envp)
 
     // Handle enviroment variables
 
-    // Max limit of env variable
-    size_t length = 100;
+    fdin = open(getenv("WORD_FREAK"),O_RDONLY);
 
-    for(i = 0; i < 5; i++){
-        // Max limit of env variable
-        char* envName = (char*)malloc(sizeof(char));
-        char* env = envp[i];
-
-        int counter = 0;
-
-        if(length < strlen(env)) break;
-
-        for(int i = 0; i < strlen(env); i++){
-            // get env variables
-            if(env[i] != '='){
-                envName[i] = env[i];
-                counter++;
-            }
-            else
-                break;
-        }
-
-        // Handle 1 character environment variable issue
-        if(1 >= counter) continue;
-
-        fdin = open(getenv(envName),O_RDONLY);
-
-        while(read(fdin, buf, MAXSIZE) > 0)
-        {
-            // Sends each row to wordConverter
-            wordConverter(buf);
-        }
-
-        close(fdin);
+    while(read(fdin, buf, MAXSIZE) > 0)
+    {
+        // Sends each row to wordConverter
+        wordConverter(buf);
     }
+
+    close(fdin);
 
     char* text = (char*)malloc(MAXSIZE*(sizeof(char)));
 
-    printf("If you won't use standart input. Control+D for determinate the program! \n");
+    printf("If you won't use standart input. Control+D for terminate the program! \n");
 
     // Handle standart input
     while(fgets(text, MAXSIZE, stdin) != NULL){
@@ -181,7 +151,7 @@ void printAllData(){
     char* line = (char*)malloc(200*sizeof(char));
 
     // create new file for "output.txt"
-    fileNo = open("output.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+    fileNo = open("output.txt", O_TRUNC | O_RDWR | O_CREAT, 0644);
 
     for(i = 0; i < 26; i++){
         // prints bst's current status
