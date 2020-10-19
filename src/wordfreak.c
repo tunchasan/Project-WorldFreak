@@ -44,6 +44,13 @@ int main(int argc, char *argv[], char** envp)
 
         fdin = open(argv[i],O_RDONLY);
 
+        // ERROR HANDLING
+        if(fdin < 0){
+            printf("ERROR..: %s file could not open for reading.\n", argv[i]);
+
+            continue;
+        }
+
         while(read(fdin, buf, MAXSIZE) > 0)
         {
             // Sends each row to wordConverter
@@ -153,6 +160,10 @@ void printAllData(){
 
     // create new file for "output.txt"
     fileNo = open("output.txt", O_TRUNC | O_RDWR | O_CREAT, 0644);
+
+    // ERROR HANDLING
+        if(fileNo < 0)
+            printf("ERROR..: output.txt file could not be opened for writing.\n");
 
     for(i = 0; i < 26; i++){
         // prints bst's current status
