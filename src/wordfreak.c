@@ -68,6 +68,7 @@ int main(int argc, char *argv[], char** envp)
 
     close(fdin);
 
+    // allocates text's spaces
     char* text = (char*)malloc(MAXSIZE*(sizeof(char)));
 
     printf("If you won't use standart input. Control+D for terminate the program! \n");
